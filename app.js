@@ -4,7 +4,7 @@ window.addEventListener('load', () => {
   const app = document.querySelector('#app')
 
   const game = Pacman(app)
-  game.run()
+  game.start()
 
   window.addEventListener('keydown', ({ keyCode }) => {
     switch (keyCode) {

@@ -28,6 +28,10 @@ const Pacman = (screen, width = 40, height = 30) => {
   }
 
   const walls = []
+  for (var x = 0; x <= width; x++) {
+    walls.push(Vector({x,0}))
+    walls.push(Vector({x,height}))
+  }
 
   let dots = []
   for (var x = 0; x <= width; x++) {
@@ -36,13 +40,15 @@ const Pacman = (screen, width = 40, height = 30) => {
     }
   }
 
-  function run() {
+  function start() {
     console.log('waka waka waka')
     draw()
-    setInterval(() => {
-      update()
-      draw()
-    }, 500)
+    setInterval(run, 500)
+  }
+
+  function run() {
+    update()
+    draw()
   }
 
   function updateDirection(requestedDirection) {
@@ -62,34 +68,20 @@ const Pacman = (screen, width = 40, height = 30) => {
   }
 
   function update() {
+    eatDots()
     if (playerCanMoveTo(player.nextPosition())) {
       player.move()
     }
-
-    eatDots()
   }
 
   function eatDots() {
-    let nearest = { distance: 1000 }
+    const playerPosition = player.getPosition()
 
-    dots.forEach((dot, index) => {
-      const distance =
-        Math.abs(dot.x - player.x) * Math.abs(dot.x - player.x) +
-        Math.abs(dot.y - player.y) * Math.abs(dot.y - player.y)
-
-      if (distance < nearest.distance) {
-        nearest = {
-          distance,
-          index,
-        }
+    for (var i = dots.length - 1; i >= 0; i--) {
+      if (playerPosition.x == dots[i].x && playerPosition.y == dots[i].y) {
+        console.log('nom nom nom', dots[i])
+        dots.splice(i, 1)
       }
-    })
-
-    console.log(nearest)
-
-    if (nearest.distance < 90) {
-      console.log('nom nom nom', nearest)
-      dots.splice(nearest.index, 1)
     }
   }
 
@@ -112,7 +104,7 @@ const Pacman = (screen, width = 40, height = 30) => {
 
   return {
     updateDirection,
-    run,
+    start,
   }
 }
 

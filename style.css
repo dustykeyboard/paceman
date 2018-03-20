@@ -1,5 +1,4 @@
 body{margin:0;padding:0;background:blue}
 #app{position:relative;background:black;border:10px solid transparent;width:50%;height:0;padding-top:25%;margin:1em auto}
-.dot{position:absolute;width:2px;height:2px;border-radius:50%;background:white;transform:translate(-50%,-50%)}
-.dot:hover{transform:scale(5)}
+.dot{position:absolute;width:2px;height:2px;border-radius:50%;background:white;transform:translate(-50%,-50%);transition:linear .5s}
 .player{position:absolute;width:15px;height:15px;border-radius:50%;background:yellow;transform:translate(-50%,-50%);transition:linear .5s}
